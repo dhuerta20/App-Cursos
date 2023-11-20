@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App_Cursos.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ScrollView Orientation="Vertical">
+        <StackLayout>
+            <Frame
+                Padding="24"
+                BackgroundColor="#2196F3"
+                CornerRadius="0">
+                <Label
+                    FontSize="36"
+                    HorizontalTextAlignment="Center"
+                    Text="Registro de Empleados"
+                    TextColor="White" />
+            </Frame>
+
+            <!--#region Photo capture-->
+
+            <Frame BackgroundColor="WhiteSmoke">
+                <StackLayout Orientation="Vertical" Spacing="10">
+                    <Image
+                        x:Name="imgPhoto"
+                        HeightRequest="150"
+                        Source="default_image.png"
+                        WidthRequest="150" />
+
+                    <Button
+                        x:Name="btnCapturePhoto"
+                        Clicked="btnCapturePhoto_Clicked"
+                        Text="Tomar Foto" />
+                </StackLayout>
+            </Frame>
+
+
+            <!--#endregion-->
+
+            <Entry x:Name="txtIdEmp" IsVisible="False" />
+            <Entry x:Name="txtNombre_de_Empleado" Placeholder="Nombre de Empleado" />
+            <Entry x:Name="txtDirección" Placeholder="Dirección" />
+            <Entry
+                x:Name="txtTeléfono"
+                Keyboard="Numeric"
+                Placeholder="Teléfono" />
+            <Entry
+                x:Name="txtEdad"
+                Keyboard="Numeric"
+                Placeholder="Edad" />
+            <Entry x:Name="txtCURP" Placeholder="CURP" />
+            <Picker x:Name="txtTipo_de_Empleado" Title="Tipo de Empleado" />
+            <Button
+                x:Name="btnRegistrar"
+                Clicked="Registrar_Button_Clicked"
+                Text="Guardar" />
+            <Button
+                x:Name="btnActualizar"
+                Clicked="Button_Actualizar_Clicked"
+                IsVisible="False"
+                Text="Actualizar" />
+            <Button
+                x:Name="btnEliminar"
+                Clicked="Borrar_Button_Clicked"
+                IsVisible="False"
+                Text="Eliminar" />
+
+
+            <ListView x:Name="lsEmpleados" ItemSelected="lstEmpleados_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    HeightRequest="20"
+                                    Source="{Binding Foto}"
+                                    WidthRequest="20" />
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    Text="{Binding IDEmp}" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="2"
+                                    Text="{Binding Nombre_de_Empleado}" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="3"
+                                    Text="{Binding Dirección}" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="4"
+                                    Text="{Binding Teléfono}" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="5"
+                                    Text="{Binding Edad}" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="6"
+                                    Text="{Binding CURP}" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="7"
+                                    Text="{Binding Tipo_de_Empleado}" />
+
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

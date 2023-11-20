@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Cursos.Cursos">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+                <Label Text="Registro de Cursos" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            </Frame>
+            <Entry x:Name="txtIdCso" IsVisible="False"/>
+            <Entry Placeholder="Nombre del Curso" x:Name="txtNombre_del_Curso" />
+            <Entry Placeholder="Tipo de Curso" x:Name="txtTipo_de_Curso" />
+            <Entry Placeholder="Descripción del Curso" x:Name="txtDescripción_del_Curso" />
+            <Entry Placeholder="Horas del Curso" x:Name="txtHoras_del_Curso" />
+            <Button Text="Registrar" x:Name="btnRegistrar_Curso" Clicked="Guardar_Curso_Button_Clicked" />
+            <Button Text="Actualizar" x:Name="btnActualizar_Curso" Clicked="Button_Actualizar_Curso_Clicked" IsVisible="False"/>
+            <Button Text="Eliminar" x:Name="btnEliminar_Curso" Clicked="Borrar_Button_Curso_Clicked" IsVisible="False"/>
+
+            <ListView x:Name="lsCursos" ItemSelected="lstCursos_ItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+
+                                </Grid.ColumnDefinitions>
+
+                                <Label Text="{Binding IDCso}" Grid.Row="0" Grid.Column="0"/>
+                                <Label Text="{Binding Nombre_del_Curso}" Grid.Row="0" Grid.Column="1"/>
+                                <Label Text="{Binding Tipo_de_Curso}" Grid.Row="0" Grid.Column="2"/>
+                                <Label Text="{Binding Descripción_del_Curso}" Grid.Row="0" Grid.Column="3"/>
+                                <Label Text="{Binding Horas_del_Curso}" Grid.Row="0" Grid.Column="4"/>
+
+
+                            </Grid>
+
+                        </ViewCell>
+
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

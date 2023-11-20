@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App_Cursos.SeguimientoCursos"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+            <StackLayout Orientation="Vertical" VerticalOptions="StartAndExpand">
+                <Label
+                    FontSize="Title"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Seguimiento de Cursos"
+                    VerticalOptions="Center" />
+                <Picker
+                    x:Name="txtNombreEmp"
+                    Title="Nombre de Empleado"
+                    ItemDisplayBinding="{Binding FullName}" />
+                <Picker
+                    x:Name="txtNombreCso"
+                    Title="Nombre del Curso"
+                    ItemDisplayBinding="{Binding FullCso}" />
+                <Entry x:Name="txtLugarCurso" Placeholder="Lugar del Curso" />
+                <DatePicker x:Name="txtFecha" Format="dd-MMM-yyyy" />
+                <TimePicker x:Name="txtHora" />
+                <Picker x:Name="txtEstatus" Title="Estatus" />
+                <Entry
+                    x:Name="entCalificacion"
+                    Keyboard="Numeric"
+                    Placeholder="Calificacion" />
+
+                <StackLayout Orientation="Horizontal">
+                    <Label
+                        Margin="5,0,0,0"
+                        FontSize="18"
+                        HorizontalOptions="StartAndExpand"
+                        Text="Recordatorio" />
+                    <Switch
+                        x:Name="sRecordatorio"
+                        HorizontalOptions="EndAndExpand"
+                        IsToggled="False" />
+                </StackLayout>
+                <Button
+                    x:Name="btnGuardarSeg"
+                    Clicked="btnGuardarSeg_Clicked"
+                    Text="Guardar Seguimiento" />
+
+
+                <ListView x:Name="cursosLst" ItemSelected="lsEmpleadoCurso_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        HeightRequest="20"
+                                        Source="{Binding Foto}"
+                                        WidthRequest="20" />
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Text="{Binding NombreEmpleado}" />
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Text="{Binding Curso}" />
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

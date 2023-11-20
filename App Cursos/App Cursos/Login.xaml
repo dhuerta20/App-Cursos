@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="App_Cursos.Login"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Spacing="10">
+
+            <Frame
+                Padding="24"
+                BackgroundColor="#2196F3"
+                CornerRadius="0">
+                <Label
+                    FontSize="36"
+                    HorizontalTextAlignment="Center"
+                    Text="Login"
+                    TextColor="White" />
+            </Frame>
+
+            <Image
+                HeightRequest="100"
+                Source="logo_appcursos.jpeg"
+                WidthRequest="100" />
+
+
+            <Label FontSize="Title" Text="Autentificar para Continuar" />
+            <Label Text="Email" />
+            <Entry
+                x:Name="txtEmailLog"
+                Keyboard="Email"
+                Placeholder="example@gmail.com" />
+            <Label Text="Contraseña" />
+            <Entry
+                x:Name="txtContraLog"
+                IsPassword="True"
+                Placeholder="*******" />
+            <Button Clicked="Button_Login" Text="Login" />
+            <Button Clicked="Button_Registrarse" Text="Registrarse" />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
