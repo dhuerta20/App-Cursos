@@ -15,6 +15,9 @@ namespace App_Cursos
     public partial class SeguimientoCursos : ContentPage
     {
         int TrackingCourse = 0;
+        bool _nuevo = true;
+
+        Seguimiento emplea;
 
         #region Methods
 
@@ -23,8 +26,35 @@ namespace App_Cursos
             try
             {
                 List<CursoEmpleado> EmployeeCourse = new List<CursoEmpleado>();
-                Seguimiento cursos = new Seguimiento();
+                Seguimiento cursos = null;
 
+                if (_nuevo) cursos = new Seguimiento();
+                else cursos = emplea;
+
+                if (this.txtLugarCurso.Text == "")
+                {
+                    return;
+                }
+
+                if (this.txtNombreEmp.SelectedIndex != 0 && this.txtNombreEmp.SelectedIndex != 1)
+                {
+                    return;
+                }
+
+                if (this.txtNombreCso.SelectedIndex != 0 && this.txtNombreCso.SelectedIndex != 1)
+                {
+                    return;
+                }
+
+                if (this.txtEstatus.SelectedIndex != 0 && this.txtEstatus.SelectedIndex != 1)
+                {
+                    return;
+                }
+
+                if (this.entCalificacion.Text == "")
+                {
+                    return;
+                }
 
                 cursos.Lugar_del_Curso = this.txtLugarCurso.Text;
                 cursos.IDEmp = ((Empleados)this.txtNombreEmp.SelectedItem).IDEmp;
@@ -121,6 +151,8 @@ namespace App_Cursos
         {
             var obj = (CursoEmpleado)e.SelectedItem;
 
+            _nuevo = false;
+
             btnGuardarSeg.IsVisible = false;
             btnActualizar.IsVisible = true;
             btnEliminar.IsVisible = true;
@@ -129,7 +161,7 @@ namespace App_Cursos
             {
                 if (!string.IsNullOrEmpty(obj.TrackingId.ToString()))
                 {
-                    Seguimiento emplea = await App.SQLiteDB.GetTrackingCourse((int)obj.TrackingId);
+                    emplea = await App.SQLiteDB.GetTrackingCourse((int)obj.TrackingId);
 
                     TrackingCourse = emplea.IDSto;
 
@@ -140,11 +172,9 @@ namespace App_Cursos
                         this.txtLugarCurso.Text = emplea.Lugar_del_Curso;
                         this.txtFecha.Date = emplea.FechaCurso;
                         this.txtHora.Time = emplea.HoraCurso;
-                        this.txtEstatus.SelectedItem = emplea.Estatus; 
+                        this.txtEstatus.SelectedItem = emplea.Estatus;
                         this.entCalificacion.Text = emplea.Calificacion.ToString();
                         //this.sRecordatorio.IsToggled = emplea.Reminder;
-
-
                     }
                 }
             }
