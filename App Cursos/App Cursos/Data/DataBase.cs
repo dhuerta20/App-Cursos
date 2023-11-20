@@ -134,6 +134,23 @@ namespace App_Cursos.Data
         }
 
 
+        public Task<Seguimiento> GetTrackingCourse(int IDSto)
+        {
+            try
+            {
+                 return db.Table<Seguimiento>().Where(a => a.IDSto == IDSto).FirstOrDefaultAsync();
+            }
+            catch (Exception x)
+            {
+                throw new Exception(x.Message);
+            }
+        }
+
+        public Task<int> DeleteTrackingAsync(Seguimiento seguimiento)
+        {
+            return db.DeleteAsync(seguimiento);
+        }
+
         #endregion
 
 

@@ -28,21 +28,35 @@
                     Keyboard="Numeric"
                     Placeholder="Calificacion" />
 
-                <StackLayout Orientation="Horizontal">
+                <!--<StackLayout Orientation="Horizontal">
                     <Label
                         Margin="5,0,0,0"
                         FontSize="18"
                         HorizontalOptions="StartAndExpand"
                         Text="Recordatorio" />
-                    <Switch
+                -->
+                <!--<Switch
                         x:Name="sRecordatorio"
                         HorizontalOptions="EndAndExpand"
-                        IsToggled="False" />
-                </StackLayout>
+                        IsToggled="False" />-->
+                <!--
+                </StackLayout>-->
                 <Button
                     x:Name="btnGuardarSeg"
                     Clicked="btnGuardarSeg_Clicked"
                     Text="Guardar Seguimiento" />
+
+
+                <Button
+                    x:Name="btnActualizar"
+                    Clicked="btnActualizar_Clicked"
+                    IsVisible="False"
+                    Text="Actualizar" />
+                <Button
+                    x:Name="btnEliminar"
+                    Clicked="btnEliminar_Clicked"
+                    IsVisible="False"
+                    Text="Eliminar" />
 
 
                 <ListView x:Name="cursosLst" ItemSelected="lsEmpleadoCurso_ItemSelected">
@@ -61,22 +75,21 @@
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Image
-                                        Grid.Row="0"
-                                        Grid.Column="0"
-                                        HeightRequest="20"
-                                        Source="{Binding Foto}"
-                                        WidthRequest="20" />
-
                                     <Label
                                         Grid.Row="0"
-                                        Grid.Column="1"
+                                        Grid.Column="0"
                                         Text="{Binding NombreEmpleado}" />
 
                                     <Label
                                         Grid.Row="0"
-                                        Grid.Column="2"
+                                        Grid.Column="1"
                                         Text="{Binding Curso}" />
+
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="2"
+                                        Text="{Binding TipoCurso}" />
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

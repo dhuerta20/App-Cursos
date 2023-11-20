@@ -19,5 +19,7 @@ namespace App_Cursos.Model
 
         public string Foto {  get; set; }
 
+        public int TrackingId {  get; set; }
+
     }
 }
