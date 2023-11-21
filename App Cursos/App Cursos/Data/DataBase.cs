@@ -119,6 +119,11 @@ namespace App_Cursos.Data
             }
         }
 
+        public Task<List<Seguimiento>> GetCourses()
+        {
+            return db.QueryAsync<Seguimiento>("SELECT * FROM Seguimiento ");
+        }
+
         public Task<List<Seguimiento>> GetCourseByDate()
         {
             try

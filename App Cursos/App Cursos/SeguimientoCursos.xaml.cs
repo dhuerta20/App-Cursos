@@ -21,11 +21,42 @@ namespace App_Cursos
 
         #region Methods
 
+        private async void _llenarDatos01()
+        {
+            List<CursoEmpleado> EmployeeCourse = new List<CursoEmpleado>();
+            List<Seguimiento> lstSeguimiento = await App.SQLiteDB.GetCourses();
+            List<CursoEmpleado> lsEmpleadoCurso = new List<CursoEmpleado>();
+
+
+            foreach (var i in lstSeguimiento)
+            {
+                CursoEmpleado cursoEmpleado = new CursoEmpleado();
+                CursosE cursosE = new CursosE();
+                Empleados employee = new Empleados();
+
+                cursosE = await App.SQLiteDB.GetCursosByIdAsync(i.IDCso);
+                employee = await App.SQLiteDB.GetEmpleadoByIdAsync(i.IDEmp);
+
+                cursoEmpleado.TrackingId = i.IDSto;
+                cursoEmpleado.CursoId = i.IDCso;
+                cursoEmpleado.Curso = cursosE.Nombre_del_Curso;
+                cursoEmpleado.TipoCurso = cursosE.Tipo_de_Curso;
+                cursoEmpleado.EmpleadoId = i.IDEmp;
+                cursoEmpleado.NombreEmpleado = employee.Nombre_de_Empleado;
+                cursoEmpleado.Foto = employee.Foto;
+
+                EmployeeCourse.Add(cursoEmpleado);
+            }
+
+            this.cursosLst.ItemsSource = EmployeeCourse;
+        }
+
+
         private async void guardar()
         {
             try
             {
-                List<CursoEmpleado> EmployeeCourse = new List<CursoEmpleado>();
+                
                 Seguimiento cursos = null;
 
                 if (_nuevo) cursos = new Seguimiento();
@@ -77,33 +108,37 @@ namespace App_Cursos
                     this.txtEstatus.SelectedIndex = -1;
                     this.entCalificacion.Text = "";
                     //this.sRecordatorio.IsToggled = false;
+
+                    this._nuevo = true;
                 }
 
-                List<Seguimiento> lstSeguimiento = await App.SQLiteDB.GetCoursesByEmployeeId(cursos.IDEmp);
-                List<CursoEmpleado> lsEmpleadoCurso = new List<CursoEmpleado>();
+                this._llenarDatos01();
+
+                //List<Seguimiento> lstSeguimiento = await App.SQLiteDB.GetCoursesByEmployeeId(cursos.IDEmp);
+                //List<CursoEmpleado> lsEmpleadoCurso = new List<CursoEmpleado>();
 
 
-                foreach (var i in lstSeguimiento)
-                {
-                    CursoEmpleado cursoEmpleado = new CursoEmpleado();
-                    CursosE cursosE = new CursosE();
-                    Empleados employee = new Empleados();
+                //foreach (var i in lstSeguimiento)
+                //{
+                //    CursoEmpleado cursoEmpleado = new CursoEmpleado();
+                //    CursosE cursosE = new CursosE();
+                //    Empleados employee = new Empleados();
 
-                    cursosE = await App.SQLiteDB.GetCursosByIdAsync(i.IDCso);
-                    employee = await App.SQLiteDB.GetEmpleadoByIdAsync(i.IDEmp);
+                //    cursosE = await App.SQLiteDB.GetCursosByIdAsync(i.IDCso);
+                //    employee = await App.SQLiteDB.GetEmpleadoByIdAsync(i.IDEmp);
 
-                    cursoEmpleado.TrackingId = i.IDSto;
-                    cursoEmpleado.CursoId = i.IDCso;
-                    cursoEmpleado.Curso = cursosE.Nombre_del_Curso;
-                    cursoEmpleado.TipoCurso = cursosE.Tipo_de_Curso;
-                    cursoEmpleado.EmpleadoId = i.IDEmp;
-                    cursoEmpleado.NombreEmpleado = employee.Nombre_de_Empleado;
-                    cursoEmpleado.Foto = employee.Foto;
+                //    cursoEmpleado.TrackingId = i.IDSto;
+                //    cursoEmpleado.CursoId = i.IDCso;
+                //    cursoEmpleado.Curso = cursosE.Nombre_del_Curso;
+                //    cursoEmpleado.TipoCurso = cursosE.Tipo_de_Curso;
+                //    cursoEmpleado.EmpleadoId = i.IDEmp;
+                //    cursoEmpleado.NombreEmpleado = employee.Nombre_de_Empleado;
+                //    cursoEmpleado.Foto = employee.Foto;
 
-                    EmployeeCourse.Add(cursoEmpleado);
-                }
+                //    EmployeeCourse.Add(cursoEmpleado);
+                //}
 
-                this.cursosLst.ItemsSource = EmployeeCourse;
+                //this.cursosLst.ItemsSource = EmployeeCourse;
 
             }
             catch (Exception x)
@@ -122,6 +157,8 @@ namespace App_Cursos
             txtEstatus.Items.Add("Completado");
             llenarDatos2();
             llenarDatos3();
+
+            _llenarDatos01();
         }
 
         public async void llenarDatos2()
