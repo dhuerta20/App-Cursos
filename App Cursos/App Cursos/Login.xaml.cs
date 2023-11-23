@@ -1,4 +1,6 @@
-﻿using Plugin.LocalNotification;
+﻿using App_Cursos.Data;
+using App_Cursos.Models;
+using Plugin.LocalNotification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,6 @@ namespace App_Cursos
         public Login()
         {
             InitializeComponent();
-
             this.NotificationNextCourses();
         }
         private async void Button_Login(object sender, EventArgs e)
@@ -66,7 +67,12 @@ namespace App_Cursos
                 
                 var cursos = await App.SQLiteDB.GetCourseByDate();
 
-                if (cursos.Count > 0)
+                // Checando cursos del día
+                List<Seguimiento> _cursos = ((List<Seguimiento>)cursos).Where(c=>c.FechaCurso.Year == DateTime.Now.Year 
+                                                                                    && c.FechaCurso.Month == DateTime.Now.Month
+                                                                                    && c.FechaCurso.Day == DateTime.Now.Day).ToList();
+
+                if (_cursos.Count > 0)
                 {
                     var request = new NotificationRequest
                     {
@@ -75,8 +81,30 @@ namespace App_Cursos
                         Description = "Tienes cursos programados el día de hoy"
                     };
 
+
                     await NotificationCenter.Current.Show(request);
                 }
+
+
+                // Checando cursos de un día antes
+                List<Seguimiento> _cursos01 = ((List<Seguimiento>)cursos).Where(c => c.FechaCurso.Year == DateTime.Now.Year
+                                                                                    && c.FechaCurso.Month == DateTime.Now.Month
+                                                                                    && c.FechaCurso.Day == (DateTime.Now.Day - 1)).ToList();
+
+                if (_cursos01.Count > 0)
+                {
+                    var request = new NotificationRequest
+                    {
+                        NotificationId = 100,
+                        Title = "App Cursos",
+                        Description = "Tienes cursos programados para el día de mañana"
+                    };
+
+
+                    await NotificationCenter.Current.Show(request);
+                }
+
+
             }
             catch (Exception x)
             {

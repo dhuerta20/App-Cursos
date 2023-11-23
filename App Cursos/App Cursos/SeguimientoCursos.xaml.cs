@@ -51,7 +51,6 @@ namespace App_Cursos
             this.cursosLst.ItemsSource = EmployeeCourse;
         }
 
-
         private async void guardar()
         {
             try
@@ -114,32 +113,6 @@ namespace App_Cursos
 
                 this._llenarDatos01();
 
-                //List<Seguimiento> lstSeguimiento = await App.SQLiteDB.GetCoursesByEmployeeId(cursos.IDEmp);
-                //List<CursoEmpleado> lsEmpleadoCurso = new List<CursoEmpleado>();
-
-
-                //foreach (var i in lstSeguimiento)
-                //{
-                //    CursoEmpleado cursoEmpleado = new CursoEmpleado();
-                //    CursosE cursosE = new CursosE();
-                //    Empleados employee = new Empleados();
-
-                //    cursosE = await App.SQLiteDB.GetCursosByIdAsync(i.IDCso);
-                //    employee = await App.SQLiteDB.GetEmpleadoByIdAsync(i.IDEmp);
-
-                //    cursoEmpleado.TrackingId = i.IDSto;
-                //    cursoEmpleado.CursoId = i.IDCso;
-                //    cursoEmpleado.Curso = cursosE.Nombre_del_Curso;
-                //    cursoEmpleado.TipoCurso = cursosE.Tipo_de_Curso;
-                //    cursoEmpleado.EmpleadoId = i.IDEmp;
-                //    cursoEmpleado.NombreEmpleado = employee.Nombre_de_Empleado;
-                //    cursoEmpleado.Foto = employee.Foto;
-
-                //    EmployeeCourse.Add(cursoEmpleado);
-                //}
-
-                //this.cursosLst.ItemsSource = EmployeeCourse;
-
             }
             catch (Exception x)
             {
@@ -158,7 +131,7 @@ namespace App_Cursos
             llenarDatos2();
             llenarDatos3();
 
-            _llenarDatos01();
+            //_llenarDatos01();
         }
 
         public async void llenarDatos2()

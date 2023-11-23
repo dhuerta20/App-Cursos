@@ -1,4 +1,5 @@
-﻿using App_Cursos.Model;
+﻿using Android.Media;
+using App_Cursos.Model;
 using App_Cursos.Models;
 using SQLite;
 using System;
@@ -21,6 +22,12 @@ namespace App_Cursos.Data
             db.CreateTableAsync<Users>().Wait();
             db.CreateTableAsync<Seguimiento>().Wait();
         }
+
+        public DataBase()
+        {
+                
+        }
+
         public Task<int> SaveEmpleadoAsync(Empleados emple)
         {
             if (emple.IDEmp != 0)
@@ -106,7 +113,6 @@ namespace App_Cursos.Data
             }
         }
 
-
         public Task<List<Seguimiento>> GetCoursesByEmployeeId(int employeeId)
         {
             try
@@ -138,7 +144,6 @@ namespace App_Cursos.Data
             }
         }
 
-
         public Task<Seguimiento> GetTrackingCourse(int IDSto)
         {
             try
@@ -155,6 +160,7 @@ namespace App_Cursos.Data
         {
             return db.DeleteAsync(seguimiento);
         }
+
 
         #endregion
 
